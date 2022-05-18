@@ -1,31 +1,3 @@
-/*****************
-This program was written by WS on 13/11/2018
-
-This program is intended for Arduino UNO R3 or Leonardo R3 (or Olimexino, which
-is a Leonardo clone). Edit #defines to set which one. If using Arduino UNO R3 or
-Leonardo R3, the different communication logic levels should be respected. Arduino
-is 5v, OPC-N3 is 3.3v. The OPC-N3 PIC is 5v tolerant on most of the SPI pins, but
-not the Slave Select pin. A simple solution is to use a resistor pair to divide the
-voltage on the SS pin appropriately. If an Olimexino device is used, it has a
-jumper switch to set it to either 5v or 3.3v. Set to 3.3v to connect to OPC-N3
-without need for logic level conversion.
-The program is for use with OPC-N3 devices with standard v1.17a firmware.
-
-This program configures the Arduino to put an OPC-N3 through 1 minute cycles
-taking one set of measurements per second during the 10s active part of the cycle
-and turning the fan and laser off for the remainder of the cycle.
-The data taken from the OPC-N3 via the SPI interface is processed
-and the processed data fed to the serial interface (the USB
-port) so that it can be displayed on a computer using suitable terminal software.
-Usual serial port settings should be set in the terminal software (8 data bits,
-1 stop bit, no parity, no flow control). Set to baud rate to match the value
-defined in this program.
-
-Adding more Slave Select pins will allow multiple OPC-N3 devices on one SPI bus.
-Only one Slave Select pin should be active at any time.
-*****************/
-//teste
-
 #include <Arduino.h>
 #include <SPI.h>
 #include <avr/wdt.h>
@@ -39,14 +11,7 @@ Only one Slave Select pin should be active at any time.
 #define SPI_OPC_busy 0x31
 #define SPI_OPC_ready 0xF3
 
-/*
-SPI pins for MEGA-R3 only
-52 = SCK
-50 = MISO
-51 = MOSI
-23 = /SS
-*/
-
+int a = 0;
 
 
 unsigned long currentTime;
@@ -488,7 +453,7 @@ void PrintData (Stream &port)
   pUInt16 = (unsigned int *)&SPI_in[54];
   port.print((float)*pUInt16/100, 3); //print to 3dp
 
-/* COMENTARIO RATONICO
+/* COMENTARIO RATONICO ..
   //Temperature (UInt16) x1
   AddDelimiter(port);
   pUInt16 = (unsigned int *)&SPI_in[56];
