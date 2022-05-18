@@ -11,13 +11,6 @@
 #define SPI_OPC_busy 0x31
 #define SPI_OPC_ready 0xF3
 
-int a = 55;
-int b = 43;
-//teste
-//mais testes
-int c = 33;
-int d = 70;
-int e = 70;
 
 
 unsigned long currentTime;
